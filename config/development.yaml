@@ -1,0 +1,4 @@
+server: 
+   port: 5502
+db:
+   url: mongodb+srv://szaib:loginwrong@cluster0.uhj8z3n.mongodb.net/?appName=Cluster0

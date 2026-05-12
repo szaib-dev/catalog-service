@@ -1,7 +1,13 @@
 import app from './app.js';
-import Config from './config/index.js';
+import config from 'config';
 import logger from './config/logger.js';
+import dbConnection from './config/db.js';
 
-app.listen(Config.PORT, () =>
-    logger.info('Server is running', { port: Config.PORT })
-);
+const startServer = async () => {
+    await dbConnection();
+    app.listen(config.get('server.port'), () =>
+        logger.info('Server is running', { port: config.get('server.port') })
+    );
+};
+
+startServer()

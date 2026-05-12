@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": " nodemon --exec tsx src/server.ts",
+    "dev": "cross-env NODE_ENV=development nodemon -L --exec tsx src/server.ts",
     "prepare": "husky",
     "lint:check": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -40,9 +40,13 @@
   },
   "dependencies": {
     "@middy/http-error-handler": "^7.1.7",
+    "config": "^4.4.1",
+    "cross-env": "^10.1.0",
     "dotenv": "^17.3.1",
     "express": "^5.2.1",
     "http-errors": "^2.0.1",
+    "js-yaml": "^4.1.1",
+    "mongoose": "^9.6.2",
     "tsx": "^4.21.0",
     "winston": "^3.19.0"
   }
