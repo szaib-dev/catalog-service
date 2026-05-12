@@ -3,3 +3,6 @@ dist/
 .env
 private/
 pnpm-lock.yaml
+
+/config
+/logs
