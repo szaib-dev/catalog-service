@@ -7,9 +7,9 @@ import {
     listCategory,
     updateCategory,
 } from './controller.js';
-import authenctication from '../middleware/authenctication.js';
-import WhoCanAccess from '../middleware/WhoCanAccess.js';
-import { UserRole } from '../types/index.js';
+import authenctication from '../../middleware/authenctication.js';
+import WhoCanAccess from '../../middleware/WhoCanAccess.js';
+import { UserRole } from '../../types/index.js';
 import { RegisterValidation, UpdateValidation } from './validator.js';
 
 const router: Router = express.Router();

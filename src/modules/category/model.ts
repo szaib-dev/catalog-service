@@ -5,10 +5,10 @@ const PriceCategoryScheam = new mongoose.Schema<PriceConfig>({
     priceType: {
         type: String,
         enum: ['base', 'additional'],
-        requried: true,
+        required: true,
     },
-    availabelOptions: {
-        type: Array,
+    availableOptions: {
+        type: [String],
         required: true,
     },
 });
