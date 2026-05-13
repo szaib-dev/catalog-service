@@ -1,4 +1,4 @@
-import { expressjwt } from 'express-jwt';
+import { expressjwt, type GetVerificationKey } from 'express-jwt';
 import jwksClient from 'jwks-rsa';
 import config from 'config';
 import type { Request, Response, NextFunction } from 'express';
@@ -8,7 +8,7 @@ export default expressjwt({
         jwksUri: config.get('public.key'),
         cache: true,
         rateLimit: true,
-    }),
+    }) as GetVerificationKey,
     algorithms: ['RS256'],
     getToken: (req: Request) => {
         const authHeader = req.headers.authorization;

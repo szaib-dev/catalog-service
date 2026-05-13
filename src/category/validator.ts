@@ -1,5 +1,5 @@
 import { body } from 'express-validator';
-export default [
+export const RegisterValidation =  [
     body('name')
         .exists()
         .withMessage('Category name is required')
@@ -18,4 +18,17 @@ export default [
             }
         }),
     body('attributes').exists().withMessage('Attributes are requried'),
+];
+
+export const UpdateValidation =  [
+    body('name')
+        .isString()
+        .withMessage('Message should be in plain format'),
+    body('priceConfiguration.*.priceType')
+        .custom((value: 'base' | 'additional') => {
+            const validKeys = ['base', 'additional'];
+            if (!validKeys.includes(value)) {
+                throw new Error('Values should be base or Additional');
+            }
+        }),
 ];
