@@ -45,5 +45,5 @@ const CategorySchema = new mongoose.Schema<CategoryInterface>({
     },
     attributes: [AttributeCategorySchema],
 });
-
-export default mongoose.model<CategoryInterface>('Category', CategorySchema);
+const Category = mongoose.model<CategoryInterface>('Category', CategorySchema);
+export default Category;
