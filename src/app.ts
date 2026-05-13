@@ -2,7 +2,8 @@ import express from 'express';
 import type { Application, NextFunction, Request, Response } from 'express';
 import logger from './config/logger.js';
 import type { HttpError } from 'http-errors';
-import CategoryRoute from './category/routes.js';
+import CategoryRoutes from './modules/category/routes.js';
+import ProductRoutes from './modules/product/routes.js';
 import cookieParser from 'cookie-parser';
 const app: Application = express();
 
@@ -14,7 +15,8 @@ app.get('/check', async (req, res, next) => {
     return res.status(200).json('success');
 });
 
-app.use('/api/category', CategoryRoute);
+app.use('/api/category', CategoryRoutes);
+app.use('/api/product', ProductRoutes);
 // global error handler
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((error: HttpError, req: Request, res: Response, next: NextFunction) => {
