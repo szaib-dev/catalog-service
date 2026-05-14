@@ -31,8 +31,8 @@ export const createProduct = async (
         const priceConfig = JSON.parse(jsonPriceConfigFormat);
 
         const image = req.file;
-        if(!mongoose.Types.ObjectId.isValid(categoryId as string)){
-            return next(createHttpError(400, "Category Id should be valid"))
+        if (!mongoose.Types.ObjectId.isValid(categoryId as string)) {
+            return next(createHttpError(400, 'Category Id should be valid'));
         }
         if (!image) {
             return next(createHttpError(400, 'Image is required'));
@@ -131,17 +131,49 @@ export const getProduct = async (
     try {
         const { id } = req.params;
 
-        if(!id){
-            return next(createHttpError(400, "Product Id is required"))
+        if (!id) {
+            return next(createHttpError(400, 'Product Id is required'));
         }
 
         if (!mongoose.Types.ObjectId.isValid(id as string)) {
             return next(createHttpError(400, 'Category Id is not valid'));
         }
 
-        const product = await Product.findById(id)
+        const product = await Product.findById(id);
 
-        return res.status(200).json({ success: true, product});
+        return res.status(200).json({ success: true, product });
+    } catch (error) {
+        return next(new Error(error as string));
+    }
+};
+
+export const deleteProduct = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { id } = req.params;
+
+        if (!id) {
+            return next(createHttpError(400, 'Product Id is required'));
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id as string)) {
+            return next(createHttpError(400, 'Category Id is not valid'));
+        }
+
+        const currentProduct = await Product.findById(id);
+
+        if(!currentProduct){
+           return next(createHttpError(404, "No related product found to delete"))
+        }
+        
+        await storage.delete(currentProduct.imageUrl)
+
+        const product = await Product.findByIdAndDelete(id);
+
+        return res.status(200).json({ success: true, product });
     } catch (error) {
         return next(new Error(error as string));
     }

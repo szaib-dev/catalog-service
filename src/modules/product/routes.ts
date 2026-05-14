@@ -1,6 +1,11 @@
 import express from 'express';
 import type { Router } from 'express';
-import { createProduct, updateProduct, getProduct } from './controller.js';
+import {
+    createProduct,
+    updateProduct,
+    getProduct,
+    deleteProduct,
+} from './controller.js';
 // import { CreateProductValidation } from './validation.js';
 import WhoCanAccess from '../../middleware/WhoCanAccess.js';
 import { UserRole } from '../../types/index.js';
@@ -17,6 +22,7 @@ router.post(
     upload.single('image'),
     createProduct
 );
+
 router.patch(
     '/update/:id',
     authenctication,
@@ -26,9 +32,13 @@ router.patch(
     updateProduct
 );
 
-router.get(
-    '/:id',
-    getProduct
+router.get('/:id', getProduct);
+
+router.delete(
+    'delete/:id',
+    authenctication,
+    WhoCanAccess([UserRole.ADMIN, UserRole.MANAGER]),
+    deleteProduct
 );
 
 export default router;
