@@ -20,19 +20,21 @@ export const createProduct = async (
             name,
             description,
             isPublished,
-            imageUrl,
             priceConfig,
             attributes,
             categoryId,
             tenantId,
         } = req.body;
 
+        const image = req.file;
+
+
+
         const product = await Product.create({
             name,
             description,
             attributes,
             categoryId,
-            imageUrl,
             isPublished,
             priceConfig,
             tenantId,
