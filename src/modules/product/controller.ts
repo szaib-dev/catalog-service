@@ -31,8 +31,9 @@ export const createProduct = async (
         const priceConfig = JSON.parse(jsonPriceConfigFormat);
 
         const image = req.file;
-
-        console.log(image);
+        if(!mongoose.Types.ObjectId.isValid(categoryId as string)){
+            return next(createHttpError(400, "Category Id should be valid"))
+        }
         if (!image) {
             return next(createHttpError(400, 'Image is required'));
         }
@@ -118,6 +119,29 @@ export const updateProduct = async (
         });
 
         return res.status(200).json({ success: true, product: updatedProduct });
+    } catch (error) {
+        return next(new Error(error as string));
+    }
+};
+export const getProduct = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+) => {
+    try {
+        const { id } = req.params;
+
+        if(!id){
+            return next(createHttpError(400, "Product Id is required"))
+        }
+
+        if (!mongoose.Types.ObjectId.isValid(id as string)) {
+            return next(createHttpError(400, 'Category Id is not valid'));
+        }
+
+        const product = await Product.findById(id)
+
+        return res.status(200).json({ success: true, product});
     } catch (error) {
         return next(new Error(error as string));
     }

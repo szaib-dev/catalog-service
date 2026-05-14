@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Router } from 'express';
-import { createProduct, updateProduct } from './controller.js';
+import { createProduct, updateProduct, getProduct } from './controller.js';
 // import { CreateProductValidation } from './validation.js';
 import WhoCanAccess from '../../middleware/WhoCanAccess.js';
 import { UserRole } from '../../types/index.js';
@@ -24,6 +24,11 @@ router.patch(
     // CreateProductValidation,
     upload.single('image'),
     updateProduct
+);
+
+router.get(
+    '/:id',
+    getProduct
 );
 
 export default router;
