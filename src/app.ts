@@ -9,6 +9,7 @@ const app: Application = express();
 
 app.use(cookieParser());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.get('/check', async (req, res, next) => {
