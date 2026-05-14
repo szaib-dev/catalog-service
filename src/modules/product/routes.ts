@@ -18,7 +18,7 @@ router.post(
     createProduct
 );
 router.patch(
-    '/update',
+    '/update/:id',
     authenctication,
     WhoCanAccess([UserRole.ADMIN, UserRole.MANAGER]),
     // CreateProductValidation,
