@@ -5,6 +5,11 @@ export interface AuthInterface extends Request {
         sub: string;
         role: string;
         id?: string;
+        tenant?: {
+            id: string
+            name: string,
+            address: string
+        }
     };
 }
 
