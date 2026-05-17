@@ -23,8 +23,6 @@ router.post(
     createProduct
 );
 
-//todo: only that manager should be able to update this product if he belongs to same tenant
-
 router.patch(
     '/update/:id',
     authenctication,
@@ -35,8 +33,6 @@ router.patch(
 );
 
 router.get('/:id', getProduct);
-
-//todo: only that manager should be able to delete this product if he belongs to same tenant
 
 router.delete(
     'delete/:id',
